@@ -98,6 +98,7 @@ function App() {
     };
 
     const endTaskLists = Array.from(destinationCol.taskLists);
+    // update related functions to update the data when moved to a different column will be called here
     const updatedTask = updateTaskStatus(
       removed,
       destinationCol.title.toLowerCase()
