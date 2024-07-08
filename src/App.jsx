@@ -39,11 +39,11 @@ function App() {
 
   const handleOnDragEnd = (result) => {
     const { destination, source } = result;
-
+    // If there is no destination, return
     if (!destination) return;
-
+    // If the item is dropped in the same position, return
     if (destination.index === source.index) return;
-
+    // Reorder the tasks
     const reorderedTasks = reorder(tasks, source.index, destination.index);
     setTasks(reorderedTasks);
   };
