@@ -26,9 +26,9 @@ const initialData = {
   columns: {
     "column-1": {
       id: "column-1",
-      title: "TO-DO",
+      title: "TODO",
       taskLists: [
-        { id: 1, content: "Configure Next.js application", status: "todo" },
+        { id: 1, content: "Configure React app application", status: "todo" },
         { id: 2, content: "Configure Next.js and tailwind", status: "todo" },
         { id: 4, content: "Create page footer", status: "todo" },
         { id: 5, content: "Create page navigation menu", status: "todo" },
@@ -36,9 +36,9 @@ const initialData = {
     },
     "column-2": {
       id: "column-2",
-      title: "IN-PROGRESS",
+      title: "INPROGRESS",
       taskLists: [
-        { id: 3, content: "Create sidebar navigation menu", status: "in-progress" },
+        { id: 3, content: "Create sidebar navigation menu", status: "inprogress" },
       ],
     },
     "column-3": {
