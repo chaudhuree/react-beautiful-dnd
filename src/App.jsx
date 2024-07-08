@@ -69,19 +69,19 @@ function App() {
 
   const handleOnDragEnd = (result) => {
     const { destination, source } = result;
-
+    // If there is no destination, return
     if (!destination) return;
-
+    // If the task is dropped in the same position, return
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
     ) {
       return;
     }
-
+    // Get the source and destination columns
     const sourceCol = state.columns[source.droppableId];
     const destinationCol = state.columns[destination.droppableId];
-
+    // If the task is dropped in the same column
     if (sourceCol.id === destinationCol.id) {
       const newColumn = reorderColumnList(
         sourceCol,
@@ -99,7 +99,7 @@ function App() {
       setState(newState);
       return;
     }
-
+    // If the task is dropped in a different
     const startTaskLists = Array.from(sourceCol.taskLists);
     const [removed] = startTaskLists.splice(source.index, 1);
     const newStartCol = {
@@ -108,6 +108,7 @@ function App() {
     };
 
     const endTaskLists = Array.from(destinationCol.taskLists);
+    // Update related functions will go here
     const updatedTask = updateTaskStatus(
       removed,
       destinationCol.title.toLowerCase()
