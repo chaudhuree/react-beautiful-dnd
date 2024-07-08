@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Column from "./Column";
 import { DragDropContext } from "react-beautiful-dnd";
 
@@ -17,7 +17,6 @@ const reorderColumnList = (sourceCol, startIndex, endIndex) => {
 };
 
 // Function to update the status of a task based on the destination column
-// changing data if the task is moved to a different column
 const updateTaskStatus = (task, newStatus) => {
   return { ...task, status: newStatus };
 };
@@ -28,7 +27,7 @@ const initialData = {
       id: "column-1",
       title: "TODO",
       taskLists: [
-        { id: 1, content: "Configure React app application", status: "todo" },
+        { id: 1, content: "Configure Next.js application", status: "todo" },
         { id: 2, content: "Configure Next.js and tailwind", status: "todo" },
         { id: 4, content: "Create page footer", status: "todo" },
         { id: 5, content: "Create page navigation menu", status: "todo" },
@@ -55,11 +54,24 @@ const initialData = {
 function App() {
   const [state, setState] = useState(initialData);
 
+  // Effect to load from localStorage on mount
+  useEffect(() => {
+    const savedState = localStorage.getItem("taskState");
+    if (savedState) {
+      setState(JSON.parse(savedState));
+    }
+  }, []);
+
+  // Effect to save to localStorage whenever state changes
+  useEffect(() => {
+    localStorage.setItem("taskState", JSON.stringify(state));
+  }, [state]);
+
   const handleOnDragEnd = (result) => {
     const { destination, source } = result;
-    //  Check if the task is dropped outside the droppable area
+
     if (!destination) return;
-    //  Check if the task is dropped in the same position
+
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -67,10 +79,9 @@ function App() {
       return;
     }
 
-    // Get the source and destination columns
     const sourceCol = state.columns[source.droppableId];
     const destinationCol = state.columns[destination.droppableId];
-    // Check if the task is dropped in the same column
+
     if (sourceCol.id === destinationCol.id) {
       const newColumn = reorderColumnList(
         sourceCol,
@@ -89,7 +100,6 @@ function App() {
       return;
     }
 
-    // Move the task to a different column
     const startTaskLists = Array.from(sourceCol.taskLists);
     const [removed] = startTaskLists.splice(source.index, 1);
     const newStartCol = {
