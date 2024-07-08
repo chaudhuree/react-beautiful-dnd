@@ -59,6 +59,7 @@ function App() {
           <div className="flex rounded-t-md items-center text-xl justify-center h-16 px-1 py-1 mb-2 bg-gray-800">
             <h1>TODOS</h1>
           </div>
+          {/*Tasks container*/}
           <Droppable droppableId="column">
             {(provided) => (
               <div
@@ -67,6 +68,7 @@ function App() {
                 {...provided.droppableProps}
               >
                 {tasks.map((task, index) => (
+                  //single task
                   <Draggable
                     key={task.id}
                     draggableId={task.id.toString()}
