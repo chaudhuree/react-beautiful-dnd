@@ -7,7 +7,7 @@
 ```json
 {
   "todos": [
-    [
+    
       { "id": 1, "content": "Configure Next.js application", "status": "todo" },
       {
         "id": 2,
@@ -22,7 +22,7 @@
       { "id": 4, "content": "Create page footer", "status": "todo" },
       { "id": 5, "content": "Create page navigation menu", "status": "todo" },
       { "id": 6, "content": "Create page layout", "status": "completed" }
-    ]
+    
   ]
 }
 ```
